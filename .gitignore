@@ -1,0 +1,23 @@
+# Design-tool workspace: decision pages, review captures and downloaded
+# third-party reference images. Not part of the site.
+.impeccable/
+
+# Dependencies and logs
+node_modules/
+npm-debug.log*
+*.log
+
+# Editors and OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local environment files
+.env
+.env.*
+
+# Generated LaTeX samples
+build/

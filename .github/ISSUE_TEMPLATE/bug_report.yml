@@ -1,0 +1,42 @@
+name: Bug report
+description: Something converts incorrectly, produces LaTeX that does not compile, or the page misbehaves.
+labels: [bug]
+body:
+  - type: textarea
+    id: input
+    attributes:
+      label: Markdown input
+      description: The smallest Markdown that shows the problem. Please remove anything private.
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: The LaTeX you expected
+      render: latex
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What Galley produced
+      description: Paste the output, and the LaTeX error if it fails to compile. A screenshot helps for visual problems.
+      render: latex
+    validations:
+      required: true
+  - type: input
+    id: rules
+    attributes:
+      label: Rules and mode
+      description: Fragment or Document, and any rules you changed (quotes, ellipses, Unicode, shorthand…).
+  - type: input
+    id: engine
+    attributes:
+      label: TeX engine
+      placeholder: pdfLaTeX (TeX Live 2025), Overleaf, XeLaTeX…
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and OS
+      placeholder: Firefox 131 on macOS 15

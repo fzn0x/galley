@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: node --test tests/galley.test.js
+      - name: Check the page stays CSP-clean
+        run: |
+          if grep -nE '<script>|<script [^>]*>[^<]+</script>| style="' index.html; then
+            echo "index.html has inline script or style; move it to js/ or css/ (see CONTRIBUTING.md)"
+            exit 1
+          fi
+
+  compile:
+    name: Examples compile with pdfLaTeX
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install TeX Live
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q --no-install-recommends texlive-latex-extra texlive-fonts-recommended texlive-plain-generic lmodern
+      - run: node tests/compile-samples.js
+      - name: Compile every sample
+        working-directory: build/samples
+        run: |
+          status=0
+          for f in *.tex; do
+            if pdflatex -interaction=nonstopmode -halt-on-error "$f" > "${f%.tex}.out" 2>&1; then
+              echo "ok   $f"
+            else
+              echo "FAIL $f"; grep -A4 '^!' "${f%.tex}.log" || tail -20 "${f%.tex}.out"; status=1
+            fi
+          done
+          exit $status

@@ -1,0 +1,23 @@
+{
+  "name": "galley",
+  "version": "1.0.0",
+  "description": "Convert Markdown into clean LaTeX with typesetter's defaults: \textit, \textbf, sections, enumerate, tables, blockquotes, verse and footnotes, plus careful handling of ellipses, quotes, abbreviations and special characters. A static, dependency-free browser tool.",
+  "private": true,
+  "license": "MIT",
+  "author": "fzn0x",
+  "homepage": "https://fzn0x.github.io/galley/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fzn0x/galley.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fzn0x/galley/issues"
+  },
+  "keywords": ["markdown", "latex", "converter", "markdown-to-latex", "typesetting", "tex", "verse", "archival"],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test tests/galley.test.js"
+  }
+}

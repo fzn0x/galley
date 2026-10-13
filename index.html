@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self' data:; img-src 'self' data: blob:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Galley: Markdown to LaTeX, set properly</title>
+<meta name="description" content="Galley converts Markdown into clean LaTeX: \textit, \textbf, sections, enumerate, tables, blockquotes, verse and footnotes, with typesetter's defaults for ellipses, quotes, abbreviations and special characters. Runs in your browser.">
+<meta name="theme-color" content="#0057FF">
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230057FF'/%3E%3Cpolygon points='9,6 13.4,6 23,26 18.6,26' fill='%23FFFFFF'/%3E%3C/svg%3E">
+<script src="js/theme-init.js"></script>
+</head>
+<body>
+
+<svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-copy" viewBox="0 0 24 24"><path d="M8.5 8.5h11v11h-11zM15.5 8.5V4.5h-11v11h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3.5v11M7 10l5 5 5-5M4.5 16.5v4h15v-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></symbol>
+    <symbol id="i-open" viewBox="0 0 24 24"><path d="M3.5 19.5v-15h6l2 2h9v13zM3.5 10.5h17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></symbol>
+    <symbol id="i-clear" viewBox="0 0 24 24"><path d="M5.5 5.5l13 13M18.5 5.5l-13 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></symbol>
+    <symbol id="i-rules" viewBox="0 0 24 24"><path d="M3.5 6.5h17M3.5 12h17M3.5 17.5h17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/><path d="M7 4v5h3V4zM14 9.5v5h3v-5zM9 15v5h3v-5z" fill="currentColor"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><path d="M9 9h6v6H9zM12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M14 3.5h-4l-5.5 5.5v6l5.5 5.5h6l3.5-3.5h-5l-3.5-3.5v-4l3.5-3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="miter"/></symbol>
+    <symbol id="i-keys" viewBox="0 0 24 24"><path d="M2.5 6.5h19v11h-19zM6 10h1M9.5 10h1M13 10h1M16.5 10h1.5M6 14h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M12 1.8a10.2 10.2 0 0 0-3.2 19.9c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1.1 1.6 1.1.9 1.6 2.4 1.1 3 .8.1-.7.4-1.1.6-1.3-2.3-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5.1 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10.2 10.2 0 0 0 12 1.8z" fill="currentColor"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19.5v-14M6.5 11l5.5-5.5 5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4.5v14M6.5 13l5.5 5.5 5.5-5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.5l5 5 10-10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"/></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24"><path d="M12 3.5l9 16H3zM12 9.5v5M12 16.8v.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M5.5 2.5h9l4 4v15h-13zM14.5 2.5v4h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></symbol>
+    <symbol id="i-slash" viewBox="0 0 24 24"><path d="M6.5 2.5h3.2l7.8 19h-3.2z" fill="currentColor"/></symbol>
+    <symbol id="i-mark" viewBox="0 0 32 32"><rect width="32" height="32" fill="currentColor"/><polygon points="9,6 13.4,6 23,26 18.6,26" fill="var(--mark-ink, #fff)"/></symbol>
+    <symbol id="i-wordmark" viewBox="5 -0.5 28 9.5"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" transform="translate(6 0)"><path d="M3.5 6.5H1.5L0.5 5.5V3.5L1.5 2.5H3.5V7.5L2.5 8.5H0.5"/><path transform="translate(5 0)" d="M0.5 2.5H2.5L3.5 3.5V6.5H1.5L0.5 5.5V4.5H3.5"/><path transform="translate(10 0)" d="M0.5 0.5V5.5L1.5 6.5H2.5"/><path transform="translate(14 0)" d="M0.5 0.5V5.5L1.5 6.5H2.5"/><path transform="translate(18 0)" d="M0.5 4.5H3.5V3.5L2.5 2.5H1.5L0.5 3.5V5.5L1.5 6.5H3.5"/><path transform="translate(23 0)" d="M0.5 2.5V5.5L1.5 6.5H3.5M3.5 2.5V7.5L2.5 8.5H0.5"/></g></symbol>
+  </defs>
+</svg>
+
+<div class="app" id="app" data-tab="in">
+
+  <header class="top">
+    <a class="brand" href="./" aria-label="Galley, Markdown to LaTeX">
+      <svg class="brand-mark" aria-hidden="true"><use href="#i-mark"/></svg>
+      <svg class="brand-word" aria-hidden="true"><use href="#i-wordmark"/></svg>
+      <span class="brand-sub">Markdown <span aria-hidden="true">→</span><span class="sr"> to </span> LaTeX</span>
+    </a>
+
+    <label class="field examples">
+      <span class="sr">Load an example</span>
+      <select id="examples">
+        <option value="">Examples…</option>
+      </select>
+    </label>
+
+    <div class="top-actions">
+      <button class="btn btn-quiet" id="rules-open" type="button" aria-haspopup="dialog" aria-controls="rules">
+        <svg aria-hidden="true"><use href="#i-rules"/></svg><span class="btn-label">Rules</span>
+      </button>
+
+      <label class="switch" title="Convert as you type (Alt+L)">
+        <input type="checkbox" id="live" role="switch">
+        <span class="switch-track" aria-hidden="true"><span class="switch-thumb"></span></span>
+        <span class="switch-label">Live</span>
+      </label>
+
+      <button class="btn btn-primary" id="convert" type="button" aria-keyshortcuts="Control+Enter Meta+Enter">
+        <span class="btn-label">Convert</span>
+        <kbd class="btn-kbd" id="convert-kbd">Ctrl ↵</kbd>
+        <svg class="btn-slash" aria-hidden="true"><use href="#i-slash"/></svg>
+      </button>
+
+      <button class="btn btn-outline" id="copy" type="button" aria-keyshortcuts="Alt+C">
+        <svg aria-hidden="true"><use href="#i-copy"/></svg><span class="btn-label">Copy LaTeX</span>
+      </button>
+    </div>
+
+    <div class="top-icons">
+      <button class="icon-btn" id="keys-open" type="button" aria-label="Keyboard shortcuts" aria-haspopup="dialog" aria-controls="keys" title="Keyboard shortcuts (?)">
+        <svg aria-hidden="true"><use href="#i-keys"/></svg>
+      </button>
+      <button class="icon-btn" id="theme" type="button" aria-label="Switch to night theme" title="Theme">
+        <svg aria-hidden="true"><use href="#i-moon"/></svg>
+      </button>
+      <a class="icon-btn" href="https://github.com/fzn0x/galley" aria-label="Galley on GitHub" title="Source on GitHub" rel="noopener">
+        <svg aria-hidden="true"><use href="#i-github"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Panels">
+    <div class="seg" role="tablist" aria-label="Show">
+      <button role="tab" type="button" id="tab-in" aria-controls="pane-in" aria-selected="true" data-tab="in">Markdown</button>
+      <button role="tab" type="button" id="tab-out" aria-controls="pane-out" aria-selected="false" data-tab="out">LaTeX</button>
+      <button role="tab" type="button" id="tab-band" aria-controls="band" aria-selected="false" data-tab="band">Changes <span class="tab-count" id="tab-count">0</span></button>
+    </div>
+  </nav>
+
+  <main class="work">
+    <section class="pane pane-in" id="pane-in" aria-labelledby="in-title">
+      <div class="pane-head">
+        <h2 class="pane-title" id="in-title">Markdown</h2>
+        <span class="pane-meta" id="in-meta">0 lines</span>
+        <span class="pane-tools">
+          <button class="tool" id="open" type="button" aria-keyshortcuts="Control+O"><svg aria-hidden="true"><use href="#i-open"/></svg><span>Open</span></button>
+          <button class="tool" id="clear" type="button"><svg aria-hidden="true"><use href="#i-clear"/></svg><span>Clear</span></button>
+        </span>
+      </div>
+      <div class="ed" id="ed">
+        <div class="ed-hl" id="in-hl" aria-hidden="true"></div>
+        <textarea id="input" class="ed-input code" spellcheck="false" autocomplete="off" autocapitalize="off" aria-label="Markdown input" placeholder="Paste or type Markdown here, or drop a .md file."></textarea>
+      </div>
+      <div class="drop" id="drop" hidden><span><svg aria-hidden="true"><use href="#i-file"/></svg>Drop to open</span></div>
+      <input type="file" id="file" accept=".md,.markdown,.mdown,.txt,text/markdown,text/plain" hidden>
+    </section>
+
+    <section class="pane pane-out" id="pane-out" aria-labelledby="out-title">
+      <div class="pane-head">
+        <h2 class="pane-title" id="out-title">LaTeX</h2>
+        <div class="seg seg-sm" role="radiogroup" aria-label="Output shape">
+          <label><input type="radio" name="shape" value="fragment" checked><span>Fragment</span></label>
+          <label><input type="radio" name="shape" value="document"><span>Document</span></label>
+        </div>
+        <label class="switch switch-sm" title="Show every change Galley made (Alt+M)">
+          <input type="checkbox" id="construction" role="switch">
+          <span class="switch-track" aria-hidden="true"><span class="switch-thumb"></span></span>
+          <span class="switch-label">Construction</span>
+        </label>
+        <span class="pane-tools">
+          <button class="tool" id="download" type="button" aria-keyshortcuts="Control+S" aria-label="Download .tex" title="Download .tex (Ctrl+S)"><svg aria-hidden="true"><use href="#i-download"/></svg><span>.tex</span></button>
+        </span>
+      </div>
+      <div class="stale" id="stale" hidden>
+        <span>The Markdown has changed since the last conversion.</span>
+        <button class="link-btn" id="stale-convert" type="button">Convert now</button>
+      </div>
+      <div class="out" id="out-scroll" tabindex="0" aria-label="LaTeX output">
+        <div class="out-code" id="out"></div>
+        <div class="empty" id="empty" hidden>
+          <p class="empty-title">Nothing to convert yet.</p>
+          <p>Paste Markdown on the left, open a file, or start from an example:</p>
+          <p class="empty-ex" id="empty-ex"></p>
+        </div>
+      </div>
+      <div class="preamble" id="preamble" hidden>
+        <span class="preamble-label">Preamble needs</span>
+        <code class="preamble-list" id="preamble-list"></code>
+        <button class="tool" id="preamble-copy" type="button"><svg aria-hidden="true"><use href="#i-copy"/></svg><span>Copy lines</span></button>
+      </div>
+    </section>
+  </main>
+
+  <section class="band" id="band" aria-labelledby="band-title">
+    <div class="band-lead">
+      <h2 class="band-title" id="band-title">Construction</h2>
+      <p class="band-total"><span class="num" id="total">0</span> <span id="total-label">changes</span></p>
+      <div class="band-nav" id="band-nav" hidden>
+        <span class="band-pos" id="band-pos" aria-live="polite"></span>
+        <button class="icon-btn icon-btn-sm" id="prev" type="button" aria-label="Previous change" aria-keyshortcuts="Alt+Shift+N"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
+        <button class="icon-btn icon-btn-sm" id="next" type="button" aria-label="Next change" aria-keyshortcuts="Alt+N"><svg aria-hidden="true"><use href="#i-down"/></svg></button>
+      </div>
+    </div>
+    <div class="cells" id="cells" role="group" aria-label="Changes by kind"></div>
+    <button class="cell cell-notes" id="notes-btn" type="button" aria-haspopup="dialog" aria-controls="notes" disabled>
+      <span class="cell-label"><svg aria-hidden="true"><use href="#i-note"/></svg>Notes</span>
+      <span class="cell-num num" id="notes-num">0</span>
+      <span class="cell-sub" id="notes-sub">Nothing to check</span>
+    </button>
+  </section>
+
+  <footer class="status">
+    <span class="st" id="st-mode"><span class="st-dot" aria-hidden="true"></span><span id="st-mode-text">Manual</span></span>
+    <span class="st" id="st-time"></span>
+    <span class="st st-grow" id="st-pos"></span>
+    <span class="st" id="st-lines"></span>
+    <span class="st st-hint" id="st-hint"></span>
+  </footer>
+</div>
+
+<dialog class="sheet sheet-left" id="rules" aria-labelledby="rules-title">
+  <form method="dialog" class="sheet-inner" id="rules-form">
+    <header class="sheet-head">
+      <h2 id="rules-title">Rules</h2>
+      <p>How Galley sets your Markdown. Changes apply as you make them.</p>
+      <button class="icon-btn sheet-close" value="close" aria-label="Close rules"><svg aria-hidden="true"><use href="#i-clear"/></svg></button>
+    </header>
+    <div class="sheet-body" id="rules-body"></div>
+    <footer class="sheet-foot">
+      <button class="btn btn-outline" type="button" id="rules-reset">Reset to defaults</button>
+      <button class="btn btn-primary" value="close"><span class="btn-label">Done</span><svg class="btn-slash" aria-hidden="true"><use href="#i-slash"/></svg></button>
+    </footer>
+  </form>
+</dialog>
+
+<dialog class="sheet sheet-narrow" id="notes" aria-labelledby="notes-title">
+  <form method="dialog" class="sheet-inner">
+    <header class="sheet-head">
+      <h2 id="notes-title">Notes</h2>
+      <p>Things to check before you compile.</p>
+      <button class="icon-btn sheet-close" value="close" aria-label="Close notes"><svg aria-hidden="true"><use href="#i-clear"/></svg></button>
+    </header>
+    <ol class="notes-list" id="notes-list"></ol>
+  </form>
+</dialog>
+
+<dialog class="sheet sheet-narrow" id="keys" aria-labelledby="keys-title">
+  <form method="dialog" class="sheet-inner">
+    <header class="sheet-head">
+      <h2 id="keys-title">Keyboard</h2>
+      <p>Shortcuts work everywhere on the page, including while you type.</p>
+      <button class="icon-btn sheet-close" value="close" aria-label="Close shortcuts"><svg aria-hidden="true"><use href="#i-clear"/></svg></button>
+    </header>
+    <table class="keys">
+      <tbody id="keys-body"></tbody>
+    </table>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden>
+  <svg aria-hidden="true"><use href="#i-check"/></svg>
+  <span id="toast-text"></span>
+  <button class="link-btn" id="toast-action" type="button" hidden></button>
+</div>
+
+<script src="js/galley.js"></script>
+<script src="js/examples.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

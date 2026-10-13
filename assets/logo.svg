@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 35 11" width="350" height="110" role="img" aria-labelledby="t">
+  <title id="t">Galley</title>
+  <polygon points="0,0 1.3,0 4.6,7 3.3,7" fill="#0057FF"/>
+  <g fill="none" stroke="#111111" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" transform="translate(6 0)">
+    <path d="M3.5 6.5 H1.5 L0.5 5.5 V3.5 L1.5 2.5 H3.5 V7.5 L2.5 8.5 H0.5"/>
+    <path transform="translate(5 0)" d="M0.5 2.5 H2.5 L3.5 3.5 V6.5 H1.5 L0.5 5.5 V4.5 H3.5"/>
+    <path transform="translate(10 0)" d="M0.5 0.5 V5.5 L1.5 6.5 H2.5"/>
+    <path transform="translate(14 0)" d="M0.5 0.5 V5.5 L1.5 6.5 H2.5"/>
+    <path transform="translate(18 0)" d="M0.5 4.5 H3.5 V3.5 L2.5 2.5 H1.5 L0.5 3.5 V5.5 L1.5 6.5 H3.5"/>
+    <path transform="translate(23 0)" d="M0.5 2.5 V5.5 L1.5 6.5 H3.5 M3.5 2.5 V7.5 L2.5 8.5 H0.5"/>
+  </g>
+</svg>
