@@ -45,10 +45,10 @@ jobs:
         run: |
           status=0
           for f in *.tex; do
-            if pdflatex -interaction=nonstopmode -halt-on-error "$f" > "${f%.tex}.out" 2>&1; then
+            if pdflatex -interaction=nonstopmode -halt-on-error "$f" > "${f%.tex}.console.txt" 2>&1; then
               echo "ok   $f"
             else
-              echo "FAIL $f"; grep -A4 '^!' "${f%.tex}.log" || tail -20 "${f%.tex}.out"; status=1
+              echo "FAIL $f"; grep -A4 '^!' "${f%.tex}.log" || tail -20 "${f%.tex}.console.txt"; status=1
             fi
           done
           exit $status
